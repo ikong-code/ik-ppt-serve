@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "@vercel/node": "^2.3.1",
     "egg": "^2.15.1",
     "egg-mysql": "^3.1.1",
     "egg-scripts": "^2.11.0",
@@ -31,6 +32,7 @@
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
+    "build": "node index.js",
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
