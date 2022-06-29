@@ -31,6 +31,7 @@ module.exports = appInfo => {
     pptDir: 'app/public',
     pptList: 'app/public/list.json',
     pptDetail: 'app/public/detail',
+    assetsDir: 'public/assets',
   };
 
 
@@ -55,19 +56,7 @@ module.exports = appInfo => {
   // };
 
   config.view = {
-    mapping: { '.html': 'ejs' },
-  };
-
-  config.jwt = {
-    secret: 'hello world', // 加密字符串
-  };
-
-  /** egg 提供两种文件接收模式，1 是 file 直接读取，2 是 stream 流的方式。
-   * 我们采用比较熟悉的 file 形式。所以需要前往 config/config.default.js 配置好接收形式.
-   * https://eggjs.github.io/zh/guide/upload.html
-   *  */
-  config.multipart = {
-    mode: 'file',
+    mapping: { '.html': 'ejs' }, // 左边写成.html后缀，会自动渲染.html文件
   };
 
   config.cors = {

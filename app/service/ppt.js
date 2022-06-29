@@ -92,7 +92,7 @@ class PptService extends Service {
             } else {
               // 写入
               fs.writeFileSync(pptDetail + '/' + values.id + '.json', JSON.stringify({ detail }));
-              resolve();
+              resolve(values);
             }
           });
         }
@@ -109,6 +109,7 @@ class PptService extends Service {
     return new Promise((resolve, reject) => {
       // 异步读取
       fs.readFile(pptDetail + '/' + id + '.json', options, function(err, data) {
+        console.log(data, 'data');
         if (err) {
           reject(err);
         } else {
@@ -159,14 +160,13 @@ class PptService extends Service {
     });
   }
 
-  async update(values, detail) {
+  async update(id, detail) {
     const listFilePath = this.config.pptList;
     const pptDetail = this.config.pptDetail;
     const options = {
       flag: 'r',
       encoding: 'utf-8',
     };
-    const id = values.id;
     return new Promise(function(resolve, reject) {
       // 异步读取
       fs.readFile(listFilePath, options, function(err, data) {
@@ -176,7 +176,7 @@ class PptService extends Service {
           const list = JSON.parse(data).list;
           const targetIdx = list.findIndex(i => i.id === id);
           if (targetIdx > -1) {
-            list[targetIdx] = values;
+            list[targetIdx] = { ...list[targetIdx], id };
             fs.writeFile(listFilePath, JSON.stringify({ list }), err => {
               if (err) {
                 reject(err);

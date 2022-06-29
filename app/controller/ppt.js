@@ -3,6 +3,11 @@ const Controller = require('egg').Controller;
 const moment = require('moment');
 
 class pptController extends Controller {
+  async index() {
+    const { ctx } = this;
+    // ctx.render 默认会去 view 文件夹寻找 index.html，这是 Egg 约定好的。
+    await ctx.render('index.html', { path: this.config.assetsDir });
+  }
   async user() {
     const { ctx } = this;
     const { name, slogen } = await ctx.service.ppt.user();
@@ -36,11 +41,11 @@ class pptController extends Controller {
     const createtime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     const id = Math.random().toString(36).slice(2);
     try {
-      await ctx.service.ppt.add({ id, name, createtime, desc, username }, detail);
+      const request = await ctx.service.ppt.add({ id, name, createtime, desc, username }, detail);
       ctx.body = {
         code: 200,
         msg: '添加成功',
-        data: null,
+        data: request,
       };
     } catch (error) {
       ctx.body = {
@@ -56,10 +61,12 @@ class pptController extends Controller {
     const { id } = ctx.query;
     try {
       const result = await ctx.service.ppt.detail(id);
+      const data = JSON.parse(result);
+      // console.log(detail);
       ctx.body = {
         code: 200,
         msg: '查询成功',
-        data: result,
+        data: data.detail,
       };
     } catch (error) {
       ctx.body = {
@@ -72,9 +79,9 @@ class pptController extends Controller {
 
   async update() {
     const { ctx } = this;
-    const { id, name, createtime, desc, username, detail } = ctx.request.body;
+    const { id, detail } = ctx.request.body;
     try {
-      await ctx.service.ppt.update({ id, name, createtime, desc, username }, detail);
+      await ctx.service.ppt.update(id, detail);
       ctx.body = {
         code: 200,
         msg: '更新成功',
