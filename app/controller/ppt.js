@@ -11,8 +11,8 @@ class pptController extends Controller {
     };
   }
   async list() {
-    const { ctx, app } = this;
-    const { page = 1, page_size = 10 } = ctx.query;
+    const { ctx } = this;
+    // const { page = 1, page_size = 10 } = ctx.query;
     console.log(ctx.query);
     const result = await ctx.service.ppt.list();
     console.log(result, 'result');
@@ -39,12 +39,12 @@ class pptController extends Controller {
   }
 
   async add() {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const { name, username, desc = '', detail } = ctx.request.body;
     console.log(ctx.request.body, 'ctx.query.body');
     const createtime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
     try {
-      const result = await ctx.service.ppt.add({ name, createtime, desc, detail, username });
+      await ctx.service.ppt.add({ name, createtime, desc, detail, username });
       ctx.body = {
         code: 200,
         msg: '添加成功',
@@ -60,10 +60,10 @@ class pptController extends Controller {
   }
 
   async update() {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const { id, ...rest } = ctx.request.body;
     try {
-      const result = await ctx.service.ppt.update(id, rest);
+      await ctx.service.ppt.update(id, rest);
       ctx.body = {
         code: 200,
         msg: '更新成功',
@@ -82,7 +82,7 @@ class pptController extends Controller {
     const { ctx } = this;
     const { id } = ctx.query;
     try {
-      const result = await ctx.service.ppt.delete(id);
+      await ctx.service.ppt.delete(id);
       ctx.body = {
         code: 200,
         msg: '删除成功',

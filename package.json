@@ -32,9 +32,10 @@
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
+    "build": "egg-scripts start --daemon --title=egg-server-ik-ppt-serve",
     "cov": "egg-bin cov",
     "lint": "eslint .",
-    "build": "npm run lint && npm run cov",
+    "ci": "npm run lint && npm run cov",
     "autod": "autod"
   },
   "ci": {
