@@ -26,25 +26,33 @@ module.exports = appInfo => {
     domainWhiteList: [ '*' ], // 配置白名单
   };
 
-  exports.mysql = {
-    // 单数据库信息配置
-    client: {
-      // host
-      host: 'localhost', //  81.68.165.190
-      // 端口号
-      port: '3306',
-      // 用户名
-      user: 'root',
-      // 密码
-      password: '123456', // 初始化密码，没设置的可以不写
-      // 数据库名
-      database: 'ppt', // 我们新建的数据库名称
-    },
-    // 是否加载到 app 上，默认开启
-    app: true,
-    // 是否加载到 agent 上，默认关闭
-    agent: false,
+  // 全局声明
+  const userConfig = {
+    pptDir: 'app/public',
+    pptList: 'app/public/list.json',
+    pptDetail: 'app/public/detail',
   };
+
+
+  // exports.mysql = {
+  //   // 单数据库信息配置
+  //   client: {
+  //     // host
+  //     host: 'localhost', //  81.68.165.190
+  //     // 端口号
+  //     port: '3306',
+  //     // 用户名
+  //     user: 'root',
+  //     // 密码
+  //     password: '123456', // 初始化密码，没设置的可以不写
+  //     // 数据库名
+  //     database: 'ppt', // 我们新建的数据库名称
+  //   },
+  //   // 是否加载到 app 上，默认开启
+  //   app: true,
+  //   // 是否加载到 agent 上，默认关闭
+  //   agent: false,
+  // };
 
   config.view = {
     mapping: { '.html': 'ejs' },
@@ -66,11 +74,6 @@ module.exports = appInfo => {
     origin: '*',
     credentials: true, // 允许cookie跨域
     allowMethods: 'GET,POST,PUT,HEAD,DELETE,PATCH',
-  };
-
-  // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
   };
 
   return {

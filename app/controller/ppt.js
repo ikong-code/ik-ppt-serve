@@ -13,10 +13,42 @@ class pptController extends Controller {
   async list() {
     const { ctx } = this;
     // const { page = 1, page_size = 10 } = ctx.query;
-    console.log(ctx.query);
-    const result = await ctx.service.ppt.list();
-    console.log(result, 'result');
-    ctx.body = result;
+    // console.log(ctx.query);
+    try {
+      const result = await ctx.service.ppt.list();
+      ctx.body = {
+        code: 200,
+        msg: '查询成功',
+        data: JSON.parse(result).list,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: 500,
+        msg: '查询失败',
+        data: null,
+      };
+    }
+  }
+
+  async add() {
+    const { ctx } = this;
+    const { name, username, desc = '', detail } = ctx.request.body;
+    const createtime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
+    const id = Math.random().toString(36).slice(2);
+    try {
+      await ctx.service.ppt.add({ id, name, createtime, desc, username }, detail);
+      ctx.body = {
+        code: 200,
+        msg: '添加成功',
+        data: null,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: 500,
+        msg: '系统错误',
+        data: null,
+      };
+    }
   }
 
   async detail() {
@@ -38,32 +70,11 @@ class pptController extends Controller {
     }
   }
 
-  async add() {
-    const { ctx } = this;
-    const { name, username, desc = '', detail } = ctx.request.body;
-    console.log(ctx.request.body, 'ctx.query.body');
-    const createtime = moment(new Date()).format('YYYY-MM-DD HH:mm:ss');
-    try {
-      await ctx.service.ppt.add({ name, createtime, desc, detail, username });
-      ctx.body = {
-        code: 200,
-        msg: '添加成功',
-        data: null,
-      };
-    } catch (error) {
-      ctx.body = {
-        code: 500,
-        msg: '系统错误',
-        data: null,
-      };
-    }
-  }
-
   async update() {
     const { ctx } = this;
-    const { id, ...rest } = ctx.request.body;
+    const { id, name, createtime, desc, username, detail } = ctx.request.body;
     try {
-      await ctx.service.ppt.update(id, rest);
+      await ctx.service.ppt.update({ id, name, createtime, desc, username }, detail);
       ctx.body = {
         code: 200,
         msg: '更新成功',
@@ -95,7 +106,6 @@ class pptController extends Controller {
         data: null,
       };
     }
-
   }
 }
 
