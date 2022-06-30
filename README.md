@@ -1,6 +1,7 @@
 # ik-ppt-serve
 
-
+### eggjs
+[egg]: https://eggjs.org
 
 ## QuickStart
 
@@ -8,7 +9,7 @@
 
 see [egg docs][egg] for more detail.
 
-### Development
+### 本地启动
 
 ```bash
 $ npm i
@@ -16,18 +17,15 @@ $ npm run dev
 $ open http://localhost:7001/
 ```
 
-### Deploy
+### 部署
 
-```bash
-$ npm start
-$ npm stop
 ```
+// 先登录下图服务器，cd xppt-server
+git pull 
+npm start  // 启动服务
+npm stop   // 关闭服务 
+```
+<img style="width: 700px;" src="https://saas.uban360.com/sfs/file?digest=fidc83b54b0a4e2486d1c45d8b0df35d5c5" />
 
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
 
-[egg]: https://eggjs.org
