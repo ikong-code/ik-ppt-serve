@@ -13,4 +13,5 @@ module.exports = app => {
   router.post('/ppt/update', controller.ppt.update);
   router.get('/ppt/delete', controller.ppt.delete);
   router.get('/ppt/detail', controller.ppt.detail);
+  router.post('/ppt/upload', controller.ppt.upload);
 };

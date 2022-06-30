@@ -1,7 +1,7 @@
 'use strict';
 const Controller = require('egg').Controller;
 const moment = require('moment');
-
+const upload = require('../lib/upload');
 class pptController extends Controller {
   async index() {
     const { ctx } = this;
@@ -109,6 +109,29 @@ class pptController extends Controller {
       ctx.body = {
         code: 500,
         msg: '删除失败',
+        data: null,
+      };
+    }
+  }
+
+  async upload() {
+    const { ctx } = this;
+    const files = ctx.request.files;
+    // console.log(files, 'files');
+    // console.log(files, 'files');
+    try {
+      const res = await upload(files.map(x => x.filepath));
+
+      console.log(res, 'result upload');
+      ctx.body = {
+        code: 200,
+        msg: '上传成功',
+        data: res,
+      };
+    } catch (error) {
+      ctx.body = {
+        code: 500,
+        msg: '上传失败',
         data: null,
       };
     }

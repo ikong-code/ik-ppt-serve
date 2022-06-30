@@ -13,7 +13,9 @@
     "egg-scripts": "^2.11.0",
     "egg-view-assets": "^1.8.0",
     "egg-view-ejs": "^3.0.0",
-    "moment": "^2.29.1"
+    "md5": "^2.3.0",
+    "moment": "^2.29.1",
+    "urllib": "^2.38.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",
