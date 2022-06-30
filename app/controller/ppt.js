@@ -5,7 +5,6 @@ const moment = require('moment');
 class pptController extends Controller {
   async index() {
     const { ctx } = this;
-    // ctx.render 默认会去 view 文件夹寻找 index.html，这是 Egg 约定好的。
     await ctx.render('index.html', { path: this.config.assetsDir });
   }
   async user() {
