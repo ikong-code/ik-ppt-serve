@@ -83,7 +83,7 @@ class PptService extends Service {
           reject(err);
         } else {
           const list = JSON.parse(data).list;
-          list.push({
+          list.unshift({
             ...values,
           });
           fs.writeFile(listFilePath, JSON.stringify({ list }), err => {
