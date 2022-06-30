@@ -5,6 +5,7 @@
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
+const path = require('path');
 module.exports = appInfo => {
   /**
    * built-in config
@@ -31,7 +32,7 @@ module.exports = appInfo => {
     pptDir: 'app/public',
     pptList: 'app/public/list.json',
     pptDetail: 'app/public/detail',
-    assetsDir: 'public/assets',
+    assetsDir: 'public/dist/assets',
   };
 
 
@@ -56,6 +57,8 @@ module.exports = appInfo => {
   // };
 
   config.view = {
+    // root: path.join(appInfo.baseDir, 'app/'),
+    root: path.join(appInfo.baseDir, 'app/public/'),
     mapping: { '.html': 'ejs' }, // 左边写成.html后缀，会自动渲染.html文件
   };
 
